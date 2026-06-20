@@ -19,9 +19,24 @@ body{
     display:flex;
     justify-content:center;
     align-items:center;
-    background:#0f172a;
     font-family:Arial,sans-serif;
     padding:20px;
+
+    /* PAGE BACKGROUND IMAGE */
+    background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+/* Page overlay for better contrast */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 0;
 }
 
 /* CARD */
@@ -37,20 +52,38 @@ body{
     justify-content:center;
     align-items:center;
 
-    background:linear-gradient(
-        -45deg,
-        #f89b29 0%,
-        #ff0f7b 100%
-    );
+    /* CARD BACKGROUND IMAGE */
+    background-image: url('https://i.pinimg.com/736x/3a/33/9a/3a339ab973f55e570c165fab5f2dc12f.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 
     transition:all .6s cubic-bezier(.23,1,.32,1);
     -webkit-tap-highlight-color:transparent;
+    z-index: 1;
+}
+
+/* Card overlay for better icon readability */
+.card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.3);
+    transition: all .6s cubic-bezier(.23,1,.32,1);
+    z-index: 1;
+}
+
+.card:hover::before,
+.card.active::before {
+    background: rgba(0, 0, 0, 0.5);
 }
 
 /* ICON */
 .icon{
     font-size:60px;
     transition:all .6s cubic-bezier(.23,1,.32,1);
+    position: relative;
+    z-index: 2;
 }
 
 /* OPEN EFFECT */
@@ -66,7 +99,7 @@ body{
     position:absolute;
     inset:0;
 
-    background:white;
+    background:rgba(2, 0, 0, 0.95);
     padding:28px;
 
     display:flex;
@@ -82,6 +115,7 @@ body{
     transition:all .6s cubic-bezier(.23,1,.32,1);
 
     overflow-y:auto;
+    z-index: 3;
 }
 
 /* SHOW CONTENT */
@@ -96,19 +130,20 @@ body{
 .card.active .icon{
     transform:rotate(-45deg) scale(0);
     opacity:0;
+    
 }
 
 .title{
     font-size:26px;
     font-weight:700;
-    color:#222;
+    color:#f80606;
     margin-bottom:14px;
 }
 
 .description{
     font-size:15px;
     line-height:1.7;
-    color:#00000c;
+    color:#ededf0;
     max-width:100%;
 }
 
@@ -150,7 +185,7 @@ body{
 
 <div class="card" id="loveCard">
 
-    <div class="icon"></div>
+    <div class="icon">👆</div>
 
     <div class="card-content">
 
@@ -159,8 +194,7 @@ body{
         </h2>
 
         <p class="description">
-           you always have a such great looks.I'd be lucky to get a photo when you have a moment
-            
+           You always have such great looks. I'd be lucky to get a photo when you have a moment.
         </p>
 
     </div>
