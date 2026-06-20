@@ -1,101 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Animated Card</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    /* Page background */
-    body {
-      margin: 0;
-      min-height: 100vh;
-      background-color: #0f172a; /* dark modern blue */
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-family: Arial, sans-serif;
-    }
+<title>Blog Card</title>
 
-    /* Card */
-    .card {
-      position: relative;
-      width: 300px;
-      height: 200px;
-      background: linear-gradient(-45deg, #f89b29 0%, #ff0f7b 100%);
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
-    }
+<style>
 
-    .card svg {
-      width: 48px;
-      fill: #333;
-      transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
-    }
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: #0f172a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+}
 
-    .card:hover {
-      transform: rotate(-5deg) scale(1.1);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-    }
 
-    .card__content {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%) rotate(-45deg);
-      width: 100%;
-      height: 100%;
-      padding: 20px;
-      box-sizing: border-box;
-      background-color: #fff;
-      opacity: 0;
-      transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
-    }
+/* CARD */
+.card {
+    position: relative;
+    width: 300px;
+    height: 200px;
+    background: linear-gradient(-45deg, #f89b29, #ff0f7b);
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.6s cubic-bezier(0.23,1,0.32,1);
+    -webkit-tap-highlight-color: transparent;
+}
 
-    .card:hover .card__content {
-      transform: translate(-50%, -50%) rotate(0deg);
-      opacity: 1;
-    }
 
-    .card__title {
-      margin: 0;
-      font-size: 24px;
-      color: #333;
-      font-weight: 700;
-    }
+/* Initial icon */
+.icon {
+    font-size: 55px;
+    transition: 0.6s cubic-bezier(0.23,1,0.32,1);
+}
 
-    .card__description {
-      margin: 10px 0 0;
-      font-size: 14px;
-      color: #777;
-      line-height: 1.4;
-    }
 
-    .card:hover svg {
-      scale: 0;
-      transform: rotate(-45deg);
-    }
-  </style>
+/* Hover and mobile active card */
+.card:hover,
+.card.active {
+    transform: rotate(-5deg) scale(1.1);
+    box-shadow: 
+        0 15px 35px rgba(0,0,0,.4);
+}
+
+
+/* Content */
+.card-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    background: white;
+    transform: translate(-50%, -50%) rotate(-45deg);
+    opacity: 0;
+    transition: all 0.6s cubic-bezier(0.23,1,0.32,1);
+}
+
+
+/* Open state */
+.card:hover .card-content,
+.card.active .card-content {
+    transform: translate(-50%, -50%) rotate(0deg);
+    opacity: 1;
+}
+
+
+/* Hide icon when opened */
+.card:hover .icon,
+.card.active .icon {
+    transform: rotate(-45deg) scale(0);
+}
+
+
+.title {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 700;
+    color: #333;
+}
+
+
+.description {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #777;
+    line-height: 1.5;
+}
+
+</style>
+
 </head>
+
 
 <body>
 
-  <div class="card">
-    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-      <path d="M20 5H4V19L13.2923 9.70649C13.6828 9.31595 14.3159 9.31591 14.7065 9.70641L20 15.0104V5ZM2 3.9934C2 3.44476 2.45531 3 2.9918 3H21.0082C21.556 3 22 3.44495 22 3.9934V20.0066C22 20.5552 21.5447 21 21.0082 21H2.9918C2.44405 21 2 20.5551 2 20.0066V3.9934ZM8 11C6.89543 11 6 10.1046 6 9C6 7.89543 6.89543 7 8 7C9.10457 7 10 7.89543 10 9C10 10.1046 9.10457 11 8 11Z"></path>
-    </svg>
 
-    <div class="card__content">
-      <p class="card__title">Card Title</p>
-      <p class="card__description">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.
-      </p>
+<div class="card" id="loveCard">
+
+    <div class="icon"></div>
+
+    <div class="card-content">
+
+        <h2 class="title">
+            If You Knew My Heart
+        </h2>
+
+        <p class="description">
+            If you only knew what my heart says when it thinks of her,
+            you would understand why her presence feels like a blessing
+            I never expected. The little things she remembers, her kindness,
+            and the way she makes every conversation feel special leave me
+            wondering if it is simply who she is(being just kind) or is to me done more intentionally. 
+                  </p>
+
     </div>
-  </div>
+
+</div>
+
+
+<script>
+
+const card = document.getElementById("loveCard");
+
+// Tap to open and close on phones
+card.addEventListener("click", function () {
+    card.classList.toggle("active");
+});
+
+</script>
+
 
 </body>
 </html>
